@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit student</title>
+</head>
+<body>
+    <form action="/edit/<%= user._id %>" method="POST">
+        <input type="text" value="<%= user.name %>" name="name">
+        <input type="text" value="<%= user.roll %>" name="roll">
+        <input type="date" value="<%= user.date %>" name="date">
+        <select name="status">
+            <option value="present" <%= user.status === "present" ? "selected" : "" %>>Present</option>
+            <option value="absent" <%= user.status==="absent"?"selected":""%>>Absent</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+    <a href="/">Back</a>
+</body>
+</html>

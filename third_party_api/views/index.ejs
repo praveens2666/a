@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke App</title>
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background: #f0f0f0;
+    }
+    .card {
+      background: white;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    </style>
+</head>
+<body>
+    <div class="con">
+    <div class="card ">
+        <h2>Random Joke</h2>
+        <% if(joke){ %>
+            <p><%= joke.setup %></p>
+            <p><%= joke.punchline %></p>
+        <% } else { %>
+            <p><%console.log(err);%></p>
+            <% } %>
+        <form action="/" method="GET">
+            <button type="submit">Get a new Joke</button>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+sudo apt update
+sudo apt install python3
+sudo apt install python3-pip
+pip install pyspark
+sudo apt install openjdk-17-jdk
+readlink -f $(which java)
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+
+nano main.py
+
+from pyspark import SparkContext
+
+# Now safely create a new one
+sc = SparkContext("local", "WordCount")
+
+text = sc.textFile("/content/demo.txt.txt")
+words = text.flatMap(lambda line: line.split(" "))
+word_counts = words.map(lambda w: (w, 1)).reduceByKey(lambda a, b: a + b)
+
+for word, count in word_counts.collect():
+    print(word, count)
+
+sc.stop()
+
+python3 main.py

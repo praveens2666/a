@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Management</title>
+</head>
+<body>
+    <form action="/submit" method="POST">
+        <input type="text" name="name" placeholder="Enter Name" required>
+        <input type="text" name="roll" placeholder="Enter roll no" required>
+        <input type="date" name="date" required/>
+        <select name="status">
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+        </select>
+        <button type="submit">Add</button>
+    </form><br/><br/>
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roll no</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                <td><%= user.name %></td>
+                <td><%= user.roll %></td>
+                <td><%= user.date%></td>
+                <td><%= user.status %></td>
+                <td>
+                    <a href="/edit/<%= user._id %>">Edit</a>
+                    <a href="/delete/<%=user._id %>">Delete</a>
+                </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
