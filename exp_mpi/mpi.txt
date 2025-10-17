@@ -1,1 +1,19 @@
-sudo apt install 
+sudo apt install python3-venv
+python3 -m venv myenv
+source myenv/bin/active
+pip install pysaprk
+
+sudo apt install python3
+sudp apt install -y -qq mpich
+sudo apt install python3-pip
+pip install mpi4py
+
+sudo gedit demo.py
+
+from mpi4py import MPI 
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+print(f"Hello from {rank} out of {size}")
+
+mpirun -np 4 python3 demo.py

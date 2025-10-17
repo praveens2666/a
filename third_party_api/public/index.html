@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke App</title>
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background: #f0f0f0;
+    }
+    .card {
+      background: white;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    </style>
+</head>
+<body>
+    <div class="con">
+    <div class="card ">
+       <p id="setup">Did you hear about the new restaurant on the moon?</p>
+<p id="punchline">The food is great, but there’s just no atmosphere.</p>
+
+<button id="newJoke">Get a new Joke</button>
+
+    </div>
+    </div>
+    <script>
+  const setupEl = document.getElementById("setup");
+  const punchlineEl = document.getElementById("punchline");
+  const btn = document.getElementById("newJoke");
+
+  btn.addEventListener("click", async () => {
+    try {
+      const res = await fetch("https://official-joke-api.appspot.com/random_joke");
+      const data = await res.json();
+      setupEl.textContent = data.setup;
+      punchlineEl.textContent = data.punchline;
+    } catch(err) {
+      setupEl.textContent = "Oops!";
+      punchlineEl.textContent = "Something went wrong.";
+      console.error(err);
+    }
+  });
+</script>
+
+</body>
+</html>

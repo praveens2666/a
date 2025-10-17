@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Demo</title>
+</head>
+<body>
+    <form id="loginform">
+        <label for="name"> Enter your email : </label>
+        <input type="email" name="name" required>
+        <label for="password">Enter your password</label>
+        <input type="password" name="password" required>
+        <button type="submit">log in or sign up</button>
+    </form>
+
+    <form action="/submit" id="dataform" style="display:none" method="POST">
+        <label for="data"> Enter name : </label>
+        <input type="text" name="name" required>
+        <label for="data"> Enter email : </label>
+        <input type="email" name="email" required>
+        <label for="data"> Enter message : </label>
+        <input type="text" name="mes" required>
+        <button type="submit">submit data</button>
+    </form>
+    <script type="module">
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+          import { getAuth,  signInWithEmailAndPassword , createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+          const firebaseConfig = {
+  apiKey: "AIzaSyBIveWc-QtefbAo-GZP31JfimuVQCNOWjo",
+  authDomain: "video-shopping-5ec7b.firebaseapp.com",
+  projectId: "video-shopping-5ec7b",
+  storageBucket: "video-shopping-5ec7b.firebasestorage.app",
+  messagingSenderId: "944280061194",
+  appId: "1:944280061194:web:da1a4942e89956032a26f3",
+  measurementId: "G-XFBEGCDPST"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+const loginform = document.getElementById('loginform');
+const dataform = document.getElementById('dataform');
+loginform.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    const name = loginform.name.value;
+    const password = loginform.password.value;
+    try {
+        await signInWithEmailAndPassword(auth,name,password);
+        console.log("user logged in");
+        loginform.style.display="none";
+        dataform.style.display="block";
+    } catch (err) {
+        try{
+        await createUserWithEmailAndPassword(auth,name,password);
+        console.log("user signed up and logged in");
+        loginform.style.display="none";
+        dataform.style.display="block";
+    }catch(err){
+        console.log(err.message);
+    }
+    }
+});
+    </script>
+</body>
+</html>
