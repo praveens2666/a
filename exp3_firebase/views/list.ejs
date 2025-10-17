@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Messages</title>
+</head>
+<body>
+  <h1>Message List</h1>
+  <table border="1" cellpadding="10">
+    <tr>
+      <th>Name</th><th>Email</th><th>Message</th><th>Actions</th>
+    </tr>
+    <% data.forEach(d => { %>
+      <tr>
+        <td><%= d.name %></td>
+        <td><%= d.email %></td>
+        <td><%= d.message %></td>
+        <td>
+          <a href="/edit/<%= d.id %>">Edit</a> |
+          <a href="/delete/<%= d.id %>" onclick="return confirm('Delete this?')">Delete</a>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+  <br>
+  <a href="/">Add New</a>
+</body>
+</html>
